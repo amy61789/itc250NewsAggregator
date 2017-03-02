@@ -79,7 +79,7 @@ if(mysqli_num_rows($result) > 0)
           </thead>
           <tbody>
            <tr>';
-     echo '<td>Title: <a href="' . VIRTUAL_PATH . 'surveys/survey_viewBAK.php?id=' . (int)$row['CategoryID'] . '">' . dbOut($row['Category']) . '</a></td></tr>';
+     echo '<td>Title: <a href="' . VIRTUAL_PATH . 'category/category_view.php?id=' . (int)$row['CategoryID'] . '">' . dbOut($row['Category']) . '</a></td></tr>';
      echo '<tr><td>Description: ' . $row['Description'] . '</td></tr> ';
 	}
 	echo $myPager->showNAV(); # show paging nav, only if enough records	 
