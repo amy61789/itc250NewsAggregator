@@ -18,7 +18,7 @@ require '../inc_0700/config_inc.php'; #provides configuration, pathing, error ha
 if(isset($_GET['id']) && (int)$_GET['id'] > 0){#proper data must be on querystring
 	 $myID = (int)$_GET['id']; #Convert to integer, will equate to zero if fails
 }else{
-	myRedirect(VIRTUAL_PATH . "surveysBAK/survey_viewNA.php");
+	myRedirect(VIRTUAL_PATH . "category/category_view.php");
 }
 
 //sql statement to select individual item
@@ -36,8 +36,9 @@ if(mysqli_num_rows($result) > 0)
         echo '<h3 align="center"><?=smartTitle();?></h3>';
 	   while ($row = mysqli_fetch_assoc($result))
 	   {
-        echo '<div align="center"><a href="' . VIRTUAL_PATH . 'surveys/survey_viewNA.php?id=' . (int)$row['FeedID'] . '">' . dbOut($row['FeedName']) . '</a><br/>';
-         echo '<tr><td>Description: ' . $row['Description'] . '</td></tr> ';
+        echo '<div align="center"><a href="' . VIRTUAL_PATH . 'category/category_view.php?id=' . (int)$row['FeedID'] . '">' . dbOut($row['FeedName']) . '</a><br/>';
+        echo '<tr><td>Description: ' . $row['Description'] . '</td></tr> ';
+	echo '<tr><td>URL: ' . $row['URL'] . '</td></tr> ';
 	   }
 }
 
@@ -76,8 +77,8 @@ if($foundRecord)
 }else{//no such muffin!
     echo '<div align="center">What! No such feed? There must be a mistake!!</div>';
     
-    echo '<div align="center"><a href="' . VIRTUAL_PATH . 'surveys/indexNA.php">Another Muffin?</a></div>';
+    echo '<div align="center"><a href="' . VIRTUAL_PATH . 'category/index.php">Another Muffin?</a></div>';
 }
-echo '<p><a href="indexNA.php">Go Back</a></p>';
+echo '<p><a href="index.php">Go Back</a></p>';
 get_footer(); #defaults to theme footer or footer_inc.php
 ?>
