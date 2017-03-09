@@ -61,7 +61,7 @@ if(mysqli_num_rows($result) > 0)
 {#records exist - process
 	while($row = mysqli_fetch_assoc($result))
 	{# process each row
-         echo '<div align="center"><a href="' . VIRTUAL_PATH . 'category/category_view.php?id=' . (int)$row['CategoryID'] . '">' . dbOut($row['Category']) . '</a><br>';
+         echo '<div align="center"><a href="category_view.php?id=' . (int)$row['CategoryID'] . '">' . dbOut($row['Category']) . '</a><br>';
          echo '<tr><td>Description: ' . $row['Description'] . '</td></tr> ';
  
 	} 

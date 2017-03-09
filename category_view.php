@@ -18,7 +18,7 @@ require '../inc_0700/config_inc.php'; #provides configuration, pathing, error ha
 if(isset($_GET['id']) && (int)$_GET['id'] > 0){#proper data must be on querystring
 	 $myID = (int)$_GET['id']; #Convert to integer, will equate to zero if fails
 }else{
-	myRedirect(VIRTUAL_PATH . "category/category_view.php");
+	myRedirect("category_view.php");
 }
 
 //sql statement to select individual item
@@ -36,7 +36,7 @@ if(mysqli_num_rows($result) > 0)
         echo '<h3 align="center"><?=smartTitle();?></h3>';
 	   while ($row = mysqli_fetch_assoc($result))
 	   {
-        echo '<div align="center"><a href="' . VIRTUAL_PATH . 'category/category_view.php?id=' . (int)$row['FeedID'] . '">' . dbOut($row['FeedName']) . '</a><br/>';
+        echo '<div align="center"><a href="feed.php?id=' . (int)$row['FeedID'] . '">' . dbOut($row['FeedName']) . '</a><br/>';
         echo '<tr><td>Description: ' . $row['Description'] . '</td></tr><br> ';
 	echo '<tr><td>URL: <br>' . $row['URL'] . '</td></tr> ';
 	   }
