@@ -21,10 +21,10 @@
  */
 
 # '../' works for a sub-folder.  use './' for the root  
-require '../inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials 
+require './inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials 
  
 # SQL statement
-$sql = "select * from NA_Categories";
+$sql = "select * from NA_Category";
 
 #Fills <title> tag. If left empty will default to $PageTitle in config_inc.php  
 $config->titleTag = 'Categories';
@@ -50,7 +50,7 @@ $config->nav1 = array("page.php"=>"New Page!") + $config->nav1; #add a new page 
 
 get_header(); #defaults to theme header or header_inc.php
 ?>
-<h3 align="center"><?=smartTitle();?></h3>
+<h3 align="center">News Categories</h3>
  
 <?php
 
@@ -62,7 +62,7 @@ if(mysqli_num_rows($result) > 0)
 	while($row = mysqli_fetch_assoc($result))
 	{# process each row
          echo '<div align="center"><a href="' . VIRTUAL_PATH . 'category/category_view.php?id=' . (int)$row['CategoryID'] . '">' . dbOut($row['Category']) . '</a><br>';
-         echo '<tr><td>Description: ' . $row['Description'] . '</td></tr> ';
+         echo '<tr><td>' . $row['Description'] . '</td></tr> ';
  
 	} 
 }else{#no records
