@@ -12,7 +12,7 @@
  */
 
 //place credentials here:
-define('DB_NAME','com_jbcoats_newsaggregator');
-define('DB_USER','jbcoats');
-define('DB_PASSWORD','lil1th01');
-define('DB_HOST','mysql.jbcoats.com'); 
+define('DB_NAME','###');
+define('DB_USER','###');
+define('DB_PASSWORD','###');
+define('DB_HOST','###'); 
