@@ -2,6 +2,34 @@
 //feed.php
 //our simplest example of consuming an RSS feed
 require '../inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
+include '../FeedCache.php';
+$feed_cache = new FeedCache('../xml/Microsoft_local_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
+$data = simplexml_load_string($feed_cache->get_data());
+
+$feed_cache = new FeedCache('../xml/Google_local_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
+$data = simplexml_load_string($feed_cache->get_data());
+
+$feed_cache = new FeedCache('../xml/Apple_local_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
+$data = simplexml_load_string($feed_cache->get_data());
+
+$feed_cache = new FeedCache('../xml/Recipes_local_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
+$data = simplexml_load_string($feed_cache->get_data());
+
+$feed_cache = new FeedCache('../xml/Chefs_local_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
+$data = simplexml_load_string($feed_cache->get_data());
+
+$feed_cache = new FeedCache('../xml/Restaurants_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
+$data = simplexml_load_string($feed_cache->get_data());
+
+$feed_cache = new FeedCache('../xml/Comedy_local_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
+$data = simplexml_load_string($feed_cache->get_data());
+
+$feed_cache = new FeedCache('../xml/Action_local_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
+$data = simplexml_load_string($feed_cache->get_data());
+
+$feed_cache = new FeedCache('../xml/Sci-Fi_local_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
+$data = simplexml_load_string($feed_cache->get_data());
+
 //sql statement to select individual item
 if(isset($_GET['id']) && (int)$_GET['id'] > 0){#proper data must be on querystring
 	 $myID = (int)$_GET['id']; #Convert to integer, will equate to zero if fails
