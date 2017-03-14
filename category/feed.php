@@ -1,8 +1,12 @@
 <?php
 //feed.php
 //our simplest example of consuming an RSS feed
+
+
 require '../inc_0700/config_inc.php'; #provides configuration, pathing, error handling, db credentials
 include '../FeedCache.php';
+
+/*
 $feed_cache = new FeedCache('../xml/Microsoft_local_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
 $data = simplexml_load_string($feed_cache->get_data());
 
@@ -30,6 +34,9 @@ $data = simplexml_load_string($feed_cache->get_data());
 $feed_cache = new FeedCache('../xml/Sci-Fi_local_file.xml', 'http://news.google.com/news?cf=all&hl=en&pz=1&ned=us&q=Microsoft&output=rss');
 $data = simplexml_load_string($feed_cache->get_data());
 
+*/
+
+
 //sql statement to select individual item
 if(isset($_GET['id']) && (int)$_GET['id'] > 0){#proper data must be on querystring
 	 $myID = (int)$_GET['id']; #Convert to integer, will equate to zero if fails
@@ -37,6 +44,10 @@ if(isset($_GET['id']) && (int)$_GET['id'] > 0){#proper data must be on querystri
 	myRedirect("category_view.php");
 }
 $sql = "select FeedName, URL, CategoryID from NA_Feed where FeedID= " . $myID;
+date_default_timezone_set('America/Los_Angeles');
+$time = date("m/d/y h:i:sa");
+
+
 
 get_header(); #defaults to theme header or header_inc.phpΩ
 $foundRecord = FALSE; # Will change to true, if record found!
@@ -48,9 +59,26 @@ if(mysqli_num_rows($result) > 0)
 {#records exist - process
 	   $foundRecord = TRUE;	
     echo '<h3 align="center"><?=smartTitle();?></h3>';
+    
 	   while ($row = mysqli_fetch_assoc($result))
 	   {    
       $request = $row['URL'];
+        
+      if(!isset($feedArray))
+      {               
+          $feed_cache = new FeedCache($row['URL'], $row['URL']);
+          $data = simplexml_load_string($feed_cache->get_data());          
+          $time_cache_set = date("m/d/y h:i:sa");
+          
+          echo '<h2>Feeds refreshed every hour. Last refreshed at: 
+      ' .  $time_cache_set . '</h2>'; 
+
+      }else
+      {
+          echo '<h2>Cache has been set. Feeds refreshed every hour. Last refreshed at: 
+      ' .  $time_cache_set . '</h2>';
+      }
+           
       $response = file_get_contents($request);
       $xml = simplexml_load_string($response);
       print '<h1>' . $xml->channel->title . '</h1>';
@@ -60,11 +88,12 @@ if(mysqli_num_rows($result) > 0)
         echo '<p>' . $story->description . '</p><br /><br />';
       }
            
-        
+       
            
         //echo '<div align="center"><a href="category_view.php?id=' . (int)$row['FeedID'] . '">' . dbOut($row['FeedName']) . '</a><br/>';
         //echo '<tr><td>Description: ' . $row['Description'] . '</td></tr><br> ';
 	//echo '<tr><td>URL: <br>' . $row['URL'] . '</td></tr> ';
+           
 	   }
 }
 
