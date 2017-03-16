@@ -37,10 +37,12 @@ if(mysqli_num_rows($result) > 0)
 	   while ($row = mysqli_fetch_assoc($result))
 	   {
         echo '<div align="center"><a href="feed.php?id=' . (int)$row['FeedID'] . '">' . dbOut($row['FeedName']) . '</a><br/>';
-        echo '<tr><td>Description: ' . $row['Description'] . '</td></tr><br> ';
-	echo '<tr><td>URL: <br>' . $row['URL'] . '</td></tr> ';
+        echo '<tr><td>' . $row['Description'] . '</td></tr><br> ';
+	//echo '<tr><td>URL: <br>' . $row['URL'] . '</td></tr> ';
 	   }
 }
+
+
 
 @mysqli_free_result($result); # We're done with the data!
 
