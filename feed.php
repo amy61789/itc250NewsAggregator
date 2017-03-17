@@ -20,10 +20,12 @@ $foundRecord = FALSE; # Will change to true, if record found!
 $result = mysqli_query(IDB::conn(),$sql) or die(trigger_error(mysqli_error(IDB::conn()), E_USER_ERROR));
 
 
+
 if(mysqli_num_rows($result) > 0)    
 {#records exist - process
 	   $foundRecord = TRUE;	
     echo '<h3 align="center"><?=smartTitle();?></h3>';
+    echo '<h5 style="color:red;">Please scroll down all the way to the bottom to see cache time</h5>';
 	   while ($row = mysqli_fetch_assoc($result))
 	   {    
       $request = $row['URL'];
@@ -108,6 +110,7 @@ function ClearFeed($request) {
     unset($_SESSION['Session'][$request]);
     echo '<h4>Feed is cleared.</4>';
 }
+
 function ClearAll() {
     unset($_SESSION['Session']);
     echo '<h4>All Feeds are cleared.</4>';
@@ -115,15 +118,16 @@ function ClearAll() {
 }
 
 
-if(isset($_SESSION['Session'])){
-    echo '<p>This array is just to make sure if feed is cleared.</p>
-         <pre>';
-    print_r(array_keys($_SESSION['Session']));
-    echo '</pre>';
+if(!isset($_SESSION['Session'])){
+    //echo '<p>This array is just to make sure if feed is cleared.</p>';
+         //<pre>';
+    //print_r(array_keys($_SESSION['Session']));
+    //echo '</pre>';
+    echo 'Session is empty';
 }
-else {
-    echo "Session is empty";
-}
+//else {
+  //  echo "Session is empty";
+//}
 
 //End of clearing cache--------------------------------
 
